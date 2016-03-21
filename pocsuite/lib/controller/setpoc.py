@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Copyright (c) 2014-2015 pocsuite developers (http://sebug.net)
+Copyright (c) 2014-2015 pocsuite developers (http://seebug.org)
 See the file 'docs/COPYING' for copying permission
 """
 
@@ -57,14 +57,13 @@ def loadPoc(pocFile):
     if conf.isPocString:
         poc = conf.pocFile
         if not conf.pocname:
-            errMsg = "Use pocString must provide pocname"
-            logger.log(CUSTOM_LOGGING.ERROR, errMsg)
+            if conf.pocFile:
+                conf.pocname = os.path.split(conf.pocFile)[1]
+            else:
+                errMsg = "Use pocString must provide pocname"
+                logger.log(CUSTOM_LOGGING.ERROR, errMsg)
         pocname = conf.pocname
     else:
-        # pocFilename = "_" + os.path.split(pocFile)[1]
-        # if not os.path.isdir(paths.POCSUITE_TMP_PATH):
-            # os.makedirs(paths.POCSUITE_TMP_PATH)
-        # pocname = os.path.join(paths.POCSUITE_TMP_PATH, pocFilename)
         pocname = os.path.split(pocFile)[1]
         poc = readFile(pocFile)
 

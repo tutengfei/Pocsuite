@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Copyright (c) 2014-2015 pocsuite developers (http://sebug.net)
+Copyright (c) 2014-2015 pocsuite developers (http://seebug.org)
 See the file 'docs/COPYING' for copying permission
 """
 
@@ -47,10 +47,11 @@ def start():
         if row[5] == 'success':
             sucNum += 1
 
-    print resultTable
-    # infoMsg = "{} of {} success !".format(sucNum, toNum)
-    # logger.log(CUSTOM_LOGGING.SYSINFO, infoMsg)
-    print "success : {} / {}".format(sucNum, toNum)
+    if not conf.quiet:
+        print resultTable
+        # infoMsg = "{} of {} success !".format(sucNum, toNum)
+        # logger.log(CUSTOM_LOGGING.SYSINFO, infoMsg)
+        print "success : {} / {}".format(sucNum, toNum)
 
     _createTargetDirs()
     _setRecordFiles()

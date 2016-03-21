@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Copyright (c) 2014-2015 pocsuite developers (http://sebug.net)
+Copyright (c) 2014-2015 pocsuite developers (http://seebug.org)
 See the file 'docs/COPYING' for copying permission
 """
 
@@ -12,10 +12,11 @@ import time
 import sys
 
 from pocsuite.lib.core.revision import getRevisionNumber
+from pocsuite import __version__
 
-VERSION = "1.0.0dev"
+VERSION = __version__
 REVISION = getRevisionNumber()
-SITE = "http://sebug.net"
+SITE = "http://seebug.org"
 VERSION_STRING = "pocsuite/%s%s" % (VERSION, "-%s" % REVISION if REVISION else "-nongit-%s" % time.strftime("%Y%m%d", time.gmtime(os.path.getctime(__file__))))
 
 IS_WIN = subprocess.mswindows
@@ -49,7 +50,7 @@ USAGE = "pocsuite [options]"
 
 INDENT = " " * 2
 
-POC_ATTRS = ("vulID", "version", "author", "vulDate", "name", "appVersion", "samples", "desc", "createDate", "updateDate", "references", "appPowerLink", "vulType", "appName")
+POC_ATTRS = ("vulID", "version", "author", "vulDate", "name", "appVersion", "desc", "createDate", "updateDate", "references", "appPowerLink", "vulType", "appName")
 
 POC_IMPORTDICT = {
     "from pocsuite.net import": "from pocsuite.lib.request.basic import",
@@ -61,6 +62,7 @@ POC_IMPORTDICT = {
 POC_REGISTER_STRING = "\nfrom pocsuite.api.poc import register\nregister({})"
 POC_REGISTER_REGEX = "register\(.*\)"
 POC_CLASSNAME_REGEX = "class\s+(.*?)\(POCBase\)"
+POC_REQUIRES_REGEX = "install_requires\s*?=\s*?\[(.*?)\]"
 
 OLD_VERSION_CHARACTER = ("from comm import cmdline", "from comm import generic")
 
@@ -90,7 +92,10 @@ PCS_OPTIONS = {
     'report': None,
     'proxy': None,
     'proxyCred': None,
-    'timeout': 5
+    'timeout': 5,
+    'quiet': False,
+    'requires': False,
+    'requiresFreeze': False
 }
 
 REPORT_TABLEBASE = """\
